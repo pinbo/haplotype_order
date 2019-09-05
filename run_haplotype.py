@@ -42,9 +42,10 @@ def main(args):
 	
 	# step 1: extract SNPs
 	#cmd0 = "gzcat " + vcf_file + " | gawk '!/^#/{exit} /^#CHROM/'> test.txt"
-	cmd1 = "gzcat " + vcf_file + ' | gawk \'$1 == "' + chrom + '" &&  $2 > ' + to_bp + ' {exit} /^#CHROM/ || ($1 == "' + chrom +  '" &&  $2 >= ' + from_bp + ' && $2 <= ' + to_bp + ")' > test.txt"
+	cmd1 = 'gawk \'$1 == "' + chrom + '" &&  $2 > ' + to_bp + ' {exit} /^#CHROM/ || ($1 == "' + chrom +  '" &&  $2 >= ' + from_bp + ' && $2 <= ' + to_bp + ")' > test.txt"
 	print "Step 1: Extract SNPs\n", cmd1
-	call(cmd1, shell=True)
+	p1 = Popen(["gzcat", vcf_file], stdout=PIPE)
+	call(cmd1, stdin=p1.stdout, shell=True)
 	
 	#step 2: convert from GT to SNP alleles
 	cmd2 = script_path + "convert_vcf_calls_to_SNP.py test.txt out.txt"
@@ -61,5 +62,5 @@ def main(args):
 
 if __name__ == '__main__':
 	import sys, os
-	from subprocess import call
+	from subprocess import call, Popen, PIPE
 	sys.exit(main(sys.argv))
