@@ -12,16 +12,8 @@ meta_data=$5 # metadata for lines to merge to SNP table
 script_path="`dirname "$0"`/bin" # scripts folder
 echo $script_path
 
-# check whether gzcat is available: MacOS yes, Linux is no
-gzcat_cmd=`command -v gzcat`
-echo "gzcat_cmd: $gzcat_cmd"
-if [$gzcat_cmd = ""]
-then
-gzcat_cmd="zcat"
-fi
-
 # step 1: extract SNPs
-cmd1="$gzcat_cmd $vcf_file | gawk '\$1 == \"$chrom\" &&  \$2 > $to_bp {exit} /^#CHROM/ || (\$1 == \"$chrom\" && \$2 >= $from_bp && \$2 <= $to_bp)' > test.txt"
+cmd1="zcat < $vcf_file | gawk '\$1 == \"$chrom\" &&  \$2 > $to_bp {exit} /^#CHROM/ || (\$1 == \"$chrom\" && \$2 >= $from_bp && \$2 <= $to_bp)' > test.txt"
 echo "Step 1: Extract SNPs: $cmd1"
 eval $cmd1
 #step 2: convert from GT to SNP alleles
