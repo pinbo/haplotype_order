@@ -44,8 +44,9 @@ def main(args):
 	vcf_file = "/Library/WebServer/Documents/blast/db/nucleotide/161010_Chinese_Spring_v1.0_pseudomolecules.fasta"
 	
 	# step 1: extract SNPs
-	cmd1 = "gzcat " + vcf_file + " | gawk '!/^#/{exit} /^#CHROM/'> test.txt"
-	print "Step 1: Extract SNPs\n", cmd1
+	cmd0 = "gzcat " + vcf_file + " | gawk '!/^#/{exit} /^#CHROM/'> test.txt"
+	cmd1 = "gzcat " + vcf_file + ' | gawk \'$1 == "' + chrom + '" &&  $2 > ' + to_bp + ' {exit} $1 == "' + chrom +  '" &&  $2 >= ' + from_bp + '" && $2 <= ' + to_bp + "' >> test.txt"
+	print "Step 1: Extract SNPs\n", cmd0, "\n", cmd1
 	call(cmd1, shell=True)
 	
 	#step 2: convert from GT to SNP alleles
