@@ -1,0 +1,36 @@
+#!/bin/bash
+
+echo "The script you are running has basename `basename "$0"`, dirname `dirname "$0"`"
+echo "The present working directory is `pwd`"
+
+chrom=$1
+from_bp=$2
+to_bp=$3
+vcf_file=$4 # vcf.gz
+meta_data=$5 # metadata for lines to merge to SNP table
+
+script_path="`dirname "$0"`/bin" # scripts folder
+echo $script_path
+
+# check whether gzcat is available: MacOS yes, Linux is no
+gzcat_cmd=`command -v gzcat`
+echo "gzcat_cmd: $gzcat_cmd"
+if [$gzcat_cmd = ""]
+then
+gzcat_cmd="zcat"
+fi
+
+# step 1: extract SNPs
+cmd1="$gzcat_cmd $vcf_file | gawk '\$1 == \"$chrom\" &&  \$2 > $to_bp {exit} /^#CHROM/ || (\$1 == \"$chrom\" && \$2 >= $from_bp && \$2 <= $to_bp)' > test.txt"
+echo "Step 1: Extract SNPs: $cmd1"
+eval $cmd1
+#step 2: convert from GT to SNP alleles
+cmd2="$script_path/convert_vcf_calls_to_SNP.py test.txt out.txt"
+echo "Step 2: Convert vcf to SNP table: $cmd2"
+eval $cmd2
+# Step 3: sort lines by similarity for haplotype analysis
+cmd3="$script_path/haplotype_analysis.R out.txt $meta_data"
+echo "Step 3: Get the sorted SNP table for haplotype analysis: $cmd3"
+eval $cmd3
+
+echo "Finish successfully! Output data is 'haplotype_ordered_genotable.txt' "
