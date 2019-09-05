@@ -1,13 +1,18 @@
 <tool id="haplotype" name="Haplotype analysis">
   <description>for 1K exon capture data</description>
-  <command interpreter="bash">run_haplotype.sh $chrom $from $to /Users/galaxy/wheat_genotyping/all.GP08_mm75_het3_publication01142019.vcf.gz /Users/galaxy/dubco_tools/haplotype_order/bin/meta_data_1000EC.txt </command>
+  <command interpreter="bash">run_haplotype.sh $chrom $from $to $vcf /Users/galaxy/dubco_tools/haplotype_order/bin/meta_data_1000EC.txt </command>
   <inputs>
     <param name="chrom" size="100" type="text" value="" label="chromosome name in RefSeqv1" help="chr1A, chr2B etc"/>
     <param name="from" size="100" type="text" value="" label="start position in bp"/>
     <param name="to" size="100" type="text" value="" label="end position in bp"/>
+    <param name="vcf" type="select" label="which vcf file to extract">
+        <option value="/Users/galaxy/wheat_genotyping/1kEC_genotype01222019.vcf.gz">Non-filtered-1K-exon</option>
+        <option value="/Users/galaxy/wheat_genotyping/all.GP08_mm75_het3_publication01142019.vcf.gz">Filtered-1K-exon</option>
+    </param>
   </inputs>
   <outputs>
       <data format="tabular" name="result_table" from_work_dir="haplotype_ordered_genotable.txt" label="Haplotype_ordered_geno_table"/>
+      <data format="pdf" name="graph" from_work_dir="dendrogram_of_lines.pdf"/>
   </outputs>
 
   <help>
