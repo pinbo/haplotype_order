@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 #
 #  Copyright 2018 Junli Zhang <zhjl86@gmail.com>

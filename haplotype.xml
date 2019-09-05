@@ -1,0 +1,22 @@
+<tool id="haplotype" name="Haplotype analysis">
+  <description>for 1K exon capture data</description>
+  <command interpreter="bash">run_haplotype.sh $chrom $from $to /Users/galaxy/wheat_genotyping/all.GP08_mm75_het3_publication01142019.vcf.gz ./bin/meta_data_1000EC.txt</command>
+  <inputs>
+    <param name="chrom" size="100" type="text" value="" label="chromosome name in RefSeqv1" help="chr1A, chr2B etc"/>
+    <param name="from" size="100" type="text" value="" label="start position in bp"/>
+    <param name="to" size="100" type="text" value="" label="end position in bp"/>
+  </inputs>
+  <outputs>
+      <data format="tabular" name="result_table" from_work_dir="haplotype_ordered_genotable.txt" label="Haplotype_ordered_geno_table"/>
+      <name="out_file1" file="dendrogram_of_lines.pdf" ftype="pdf" />
+  </outputs>
+
+  <help>
+
+**OVERVIEW**
+
+Extract and order the individuals by similarity for haplotype analysis
+
+  </help>
+
+</tool>

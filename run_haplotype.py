@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 #
 #  run_getkasp.py
@@ -43,7 +43,7 @@ def main(args):
 	# step 1: extract SNPs
 	#cmd0 = "gzcat " + vcf_file + " | gawk '!/^#/{exit} /^#CHROM/'> test.txt"
 	#out = open("cmd1.sh", "w")
-	cmd1 = "gzcat " + vcf_file + ' | gawk \'$1 == "' + chrom + '" &&  $2 > ' + to_bp + ' {exit} /^#CHROM/ || ($1 == "' + chrom +  '" &&  $2 >= ' + from_bp + ' && $2 <= ' + to_bp + ")' > test.txt"
+	cmd1 = "zcat " + vcf_file + ' | gawk \'$1 == "' + chrom + '" &&  $2 > ' + to_bp + ' {exit} /^#CHROM/ || ($1 == "' + chrom +  '" &&  $2 >= ' + from_bp + ' && $2 <= ' + to_bp + ")' > test.txt"
 	print "Step 1: Extract SNPs\n", cmd1
 	#out.write(cmd1)
 	#out.close()
