@@ -30,8 +30,6 @@
 # example: run_getkasp.py for_polymarker.csv 3 200 1 1 1 65
 
 #########################
-from glob import glob
-
 
 def main(args):
 	chrom = args[1]
@@ -41,12 +39,11 @@ def main(args):
 	meta_data = args[5] # metadata for lines to merge to SNP table
 
 	script_path = os.path.dirname(os.path.realpath(__file__)) + "/bin/" # scripts folder
-	vcf_file = "/Library/WebServer/Documents/blast/db/nucleotide/161010_Chinese_Spring_v1.0_pseudomolecules.fasta"
 	
 	# step 1: extract SNPs
-	cmd0 = "gzcat " + vcf_file + " | gawk '!/^#/{exit} /^#CHROM/'> test.txt"
-	cmd1 = "gzcat " + vcf_file + ' | gawk \'$1 == "' + chrom + '" &&  $2 > ' + to_bp + ' {exit} $1 == "' + chrom +  '" &&  $2 >= ' + from_bp + '" && $2 <= ' + to_bp + "' >> test.txt"
-	print "Step 1: Extract SNPs\n", cmd0, "\n", cmd1
+	#cmd0 = "gzcat " + vcf_file + " | gawk '!/^#/{exit} /^#CHROM/'> test.txt"
+	cmd1 = "gzcat " + vcf_file + ' | gawk \'$1 == "' + chrom + '" &&  $2 > ' + to_bp + ' {exit} /^#CHROM/ || ($1 == "' + chrom +  '" &&  $2 >= ' + from_bp + ' && $2 <= ' + to_bp + ")' > test.txt"
+	print "Step 1: Extract SNPs\n", cmd1
 	call(cmd1, shell=True)
 	
 	#step 2: convert from GT to SNP alleles
