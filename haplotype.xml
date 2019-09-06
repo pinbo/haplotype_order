@@ -11,8 +11,11 @@
     </param>
   </inputs>
   <outputs>
-      <data format="tabular" name="result_table" from_work_dir="haplotype_ordered_genotable.txt" label="Haplotype_ordered_geno_table"/>
-      <data format="pdf" name="graph" from_work_dir="dendrogram_of_lines.pdf"/>
+      <data format="tabular" name="result_table1" from_work_dir="haplotype_ordered_genotable.txt" label="Haplotype_ordered_geno_table"/>
+	  <data format="tabular" name="result_table2" from_work_dir="haplotype_ordered_genotable_numbers.txt" label="Haplotype_ordered_geno_table_numbers"/>
+	  <data format="tabular" name="result_table3" from_work_dir="raw_extracted_genotable.txt" label="Raw_geno_table"/>
+      <data format="pdf" name="graph" from_work_dir="dendrogram_of_lines.pdf" label="Dendrogram_of_lines"/>
+	  
   </outputs>
 
   <help>

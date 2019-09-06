@@ -8,6 +8,7 @@ from_bp=$2
 to_bp=$3
 vcf_file=$4 # vcf.gz
 meta_data=$5 # metadata for lines to merge to SNP table
+maxmiss=$6
 
 script_path="`dirname "$0"`/bin" # scripts folder
 echo $script_path
@@ -21,7 +22,7 @@ cmd2="$script_path/convert_vcf_calls_to_SNP.py test.txt out.txt"
 echo "Step 2: Convert vcf to SNP table: $cmd2"
 eval $cmd2
 # Step 3: sort lines by similarity for haplotype analysis
-cmd3="$script_path/haplotype_analysis.R out.txt $meta_data"
+cmd3="$script_path/haplotype_analysis.R out.txt $meta_data $maxmiss"
 echo "Step 3: Get the sorted SNP table for haplotype analysis: $cmd3"
 eval $cmd3
 
