@@ -23,7 +23,19 @@
 
 **OVERVIEW**
 
-Extract and order the individuals by similarity for haplotype analysis
+Extract 1000 Exon Capture SNPs and order the individuals by similarity for haplotype analysis.
+
+**Output**
+
+Four files are output from the analysis:
+
+1. A pdf file with dendrogram graph of lines
+
+2. A raw table with line information and A/T/G/C coded genotyping results
+
+3. A haplotype ordered table with line information and A/T/G/C coded genotyping results
+
+4. A haplotype ordered table with line information and 0/1/2 coded genotyping results: 0 is homozygous reference allele, 2 is homozygous alternative allele, and 1 is heterozygous.
 
   </help>
 
