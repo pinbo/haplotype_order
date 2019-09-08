@@ -65,12 +65,12 @@ fit <- hclust(snp.dist,method="ward.D2")
 #str(fit)
 pdf(file="dendrogram_of_lines.pdf", width = 14)
 plot(fit, hang=-1, labels=FALSE)
-# rect.hclust(fit, h = 10, border = "red")
+rect.hclust(fit, h = 5, border = "blue")
 dev.off()
 
 # get big group number
-maxheight = max(fit$height)
-ng = cutree(fit, h = maxheight/4) # number of group, use 1/4 of the max height as cut threshold
+#maxheight = max(fit$height)
+ng = cutree(fit, h = 5) # number of group, use 5 as cut threshold
 table(ng)
 
 ordered_line_names = fit$labels[fit$order]
