@@ -57,6 +57,7 @@ tokeep = apply(dd4, 2, function(x){
 })
 
 dd4 = dd4[,tokeep]
+dim(dd4)
 
 ##
 snp.dist <- dist(dd4)
@@ -71,17 +72,16 @@ dev.off()
 maxheight = max(fit$height)
 ng = cutree(fit, h = maxheight/4) # number of group, use 1/4 of the max height as cut threshold
 table(ng)
-dd4.1 = cbind(dd4, ng)
-snp1.1 = cbind(snp, ng)
 
 ordered_line_names = fit$labels[fit$order]
-dd5 = dd4.1[ordered_line_names,]
-snp2 = snp1.1[ordered_line_names, colnames(dd4.1)]
+ng = ng[ordered_line_names]
+dd5 = dd4[ordered_line_names,]
+snp2 = snp[ordered_line_names, colnames(dd4)]
 md2 = md[ordered_line_names,]
 
 all(rownames(snp2) == rownames(md2))
-outdata = cbind(md2, snp2) # with A, T, G, C alleles
-outdata2 = cbind(md2, dd5) # with numbers: 0 is ref, 2 is alt, 1 is het.
+outdata = cbind(md2, snp2, ng) # with A, T, G, C alleles
+outdata2 = cbind(md2, dd5, ng) # with numbers: 0 is ref, 2 is alt, 1 is het.
 outdata3 = cbind(md[rownames(snp),], snp) # non-filtered raw data
 #outdata[1:4,1:30]
 
