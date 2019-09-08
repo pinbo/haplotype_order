@@ -2,7 +2,7 @@
 
 args = commandArgs(trailingOnly=TRUE)
 
-if (length(args) < 3) {
+if (length(args) < 4) {
   stop("Please give the marker data, metadata file, maximum missing data for lines, and maximum missing data for markers\n")
 }
 
@@ -36,7 +36,7 @@ dimnames(snp) = list(colnames(dd)[6:nc], snpname)
 dd2.1 = dd2 - 1
 
 # remove markers with too many missing values
-dd2.2 = dd2.1[ , colSums(is.na(dd2.1)) < nrow(dd2.1)*maxmissm ]
+dd3 = dd2.1[ , colSums(is.na(dd2.1)) < nrow(dd2.1)*maxmissm ]
 
 # to see the maximum missing values I can keep.
 for (i in rev(seq(0.1, 0.9, 0.05))){
@@ -61,15 +61,24 @@ dd4 = dd4[,tokeep]
 ##
 snp.dist <- dist(dd4)
 fit <- hclust(snp.dist,method="ward.D2")
-str(fit)
-pdf(file="dendrogram_of_lines.pdf", width = 10)
+#str(fit)
+pdf(file="dendrogram_of_lines.pdf", width = 14)
 plot(fit, hang=-1, labels=FALSE)
 # rect.hclust(fit, h = 10, border = "red")
 dev.off()
+
+# get big group number
+maxheight = max(fit$height)
+ng = cutree(fit, h = maxheight/4) # number of group, use 1/4 of the max height as cut threshold
+table(ng)
+dd4.1 = cbind(dd4, ng)
+snp1.1 = cbind(snp, ng)
+
 ordered_line_names = fit$labels[fit$order]
-snp2 = snp[ordered_line_names,]
+dd5 = dd4.1[ordered_line_names,]
+snp2 = snp1.1[ordered_line_names, colnames(dd4.1)]
 md2 = md[ordered_line_names,]
-dd5 = dd4[ordered_line_names,]
+
 all(rownames(snp2) == rownames(md2))
 outdata = cbind(md2, snp2) # with A, T, G, C alleles
 outdata2 = cbind(md2, dd5) # with numbers: 0 is ref, 2 is alt, 1 is het.
