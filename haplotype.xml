@@ -1,11 +1,12 @@
 <tool id="haplotype" name="Haplotype analysis">
   <description>for 1K exon capture data</description>
-  <command interpreter="bash">run_haplotype.sh $chrom $from $to $vcf /Users/galaxy/dubco_tools/haplotype_order/bin/meta_data_1000EC.txt $maxmiss</command>
+  <command interpreter="bash">run_haplotype.sh $chrom $from $to $vcf /Users/galaxy/dubco_tools/haplotype_order/bin/meta_data_1000EC.txt $maxmissl $maxmissm</command>
   <inputs>
     <param name="chrom" size="100" type="text" value="" label="chromosome name in RefSeqv1" help="chr1A, chr2B etc"/>
     <param name="from" size="100" type="text" value="" label="start position in bp"/>
     <param name="to" size="100" type="text" value="" label="end position in bp"/>
-    <param name="maxmiss" size="100" type="text" value="0.5" label="Missing values filter for lines (0 - 1)"/>
+    <param name="maxmissl" size="100" type="text" value="0.1" label="Missing values filter for lines (0 - 1). Default 10%"/>
+    <param name="maxmissm" size="100" type="text" value="0.1" label="Missing values filter for markers (0 - 1). Default 10%"/>
     <param name="vcf" type="select" label="which vcf file to extract">
         <option value="/Users/galaxy/wheat_genotyping/1kEC_genotype01222019.vcf.gz">Non-filtered-1K-exon</option>
         <option value="/Users/galaxy/wheat_genotyping/all.GP08_mm75_het3_publication01142019.vcf.gz">Filtered-1K-exon</option>
