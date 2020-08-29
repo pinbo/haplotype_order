@@ -83,7 +83,7 @@ cn = colnames(snp2)
 snp.infor = data.frame(do.call('rbind', strsplit(cn,'-',fixed=TRUE)))
 colnames(snp.infor) = c("Chrom", "Pos", "Ref", "Alt")
 snp4 = cbind(snp.infor, snp3)
-outdata = rbind(group=c("Group", rep("", 3), ng), snp4) # with A, T, G, C alleles
+outdata = rbind(as.matrix(snp4), c("Group", rep("-", 3), ng)) # with A, T, G, C alleles
 
 
 ### write all output data
