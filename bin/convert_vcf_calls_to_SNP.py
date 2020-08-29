@@ -37,7 +37,7 @@ def gt2snp(allele_list, gt):
 	if "." in gt: # missing "./." or "."
 		c = "N"
 	else:
-		a, b = gt.split("/")
+		a, b = gt.split(":")[0].split("/")
 		if a == b: # homozygous
 			c = allele_list[int(a)]
 		else:
