@@ -1,4 +1,4 @@
-<tool id="haplotype" name="Haplotype analysis">
+<tool id="haplotype" name="Haplotype analysis v2">
   <description>for a vcf subset</description>
   <command interpreter="bash">run_haplotype_given_vcf.sh $vcfsubset $maxmissl $maxmissm</command>
   <inputs>
