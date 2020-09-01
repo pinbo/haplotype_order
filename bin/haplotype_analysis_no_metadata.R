@@ -19,9 +19,10 @@ nr = nrow(dd)
 snp = t(dd[,6:nc])
 #snp[1:5,1:5]
 snpname = apply( dd[ , c(1,2,4,5) ] , 1 , paste , collapse = "-" )
-snpname
+#snpname
 dd2 = sapply(1:nr, function(x) {
-  tt = factor(dd[x, 6:nc], levels = c(dd[x,4], "H", dd[x,5]))
+  #tt = factor(dd[x, 6:nc], levels = c(dd[x,4], "H", dd[x,5]))
+  tt = factor(dd[x, 6:nc])
   tt2 = as.numeric(tt)
 })
 
@@ -51,7 +52,7 @@ dim(dd4)
 # remove monomorphic markers
 tokeep = apply(dd4, 2, function(x){
   n1 = sum(x == 0, na.rm = T)
-  n2 = sum(x == 2, na.rm = T)
+  n2 = sum(x == 1, na.rm = T)
   min(n1, n2) > 0 # now keep markers with at least 1 minor alleles
 })
 sum(tokeep)
