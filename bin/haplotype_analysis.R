@@ -64,8 +64,8 @@ snp.dist <- dist(dd4)
 fit <- hclust(snp.dist,method="ward.D2")
 ht = max(fit$height)/20 # max height / 20 as the cut height
 #str(fit)
-pdf(file="dendrogram_of_lines.pdf", width = 14)
-plot(fit, hang=-1, labels=FALSE)
+pdf(file="dendrogram_of_lines.pdf", width = 30)
+plot(fit, hang=-1, cex = 0.2)
 rect.hclust(fit, h = ht, border = "blue")
 dev.off()
 
