@@ -16,7 +16,7 @@ md = read.delim(metadata)
 #md[1:5,1:4]
 rownames(md) = md[,1]
 dim(dd)
-
+dd = as.matrix(dd)
 nc = ncol(dd)
 nr = nrow(dd)
 

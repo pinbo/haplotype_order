@@ -12,7 +12,7 @@ maxmissm = as.numeric(args[3]) # maximum missing values to keep a marker
 
 dd= read.delim(snpfile, check.names = F, as.is = T, na.strings = "N")
 dim(dd)
-
+dd = as.matrix(dd)
 nc = ncol(dd)
 nr = nrow(dd)
 
