@@ -5,6 +5,7 @@
 # install.packages("~/Downloads/HaploBlocker_1.6.06.tar.gz",type="source", repo=NULL)
 
 suppressMessages(library(HaploBlocker))
+library(RColorBrewer)
 hap1b = read.delim("haplotype_ordered_genotable.txt", na.strings = "-")
 hap1b = hap1b[-nrow(hap1b),]
 dim(hap1b)
