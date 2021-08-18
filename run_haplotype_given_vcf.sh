@@ -25,7 +25,7 @@ eval $cmd3
 echo "Finish successfully! Output data is 'haplotype_ordered_genotable.txt' "
 
 # Step 4: calculate haplotype blocks using HaploBlocker
-cmd4="$script_path/haploblocker.R $min_majorblock"
+cmd4="$script_path/haploblocker.R $vcf_file $min_majorblock"
 echo "Step 4: calculate haplotype blocks using HaploBlocker: $cmd4"
 eval $cmd4
 echo "Finish successfully! Output data is 'haplo_block_matrix.txt' "
