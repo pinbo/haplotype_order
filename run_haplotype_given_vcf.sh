@@ -9,6 +9,7 @@ vcf_file=$1 # vcf
 maxmissl=$2
 maxmissm=$3
 min_majorblock=$4
+window_size=$5
 
 cp $vcf_file input.vcf
 
@@ -27,7 +28,7 @@ eval $cmd3
 echo "Finish successfully! Output data is 'haplotype_ordered_genotable.txt' "
 
 # Step 4: calculate haplotype blocks using HaploBlocker
-cmd4="$script_path/haploblocker.R input.vcf $min_majorblock"
+cmd4="$script_path/haploblocker.R input.vcf $min_majorblock $window_size"
 echo "Step 4: calculate haplotype blocks using HaploBlocker: $cmd4"
 eval $cmd4
 echo "Finish successfully! Output data is 'haplo_block_matrix.txt' "

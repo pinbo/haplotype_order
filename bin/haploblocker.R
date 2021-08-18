@@ -5,28 +5,33 @@
 # install.packages("~/Downloads/HaploBlocker_1.6.06.tar.gz",type="source", repo=NULL)
 
 args = commandArgs(trailingOnly=TRUE)
-if (length(args) < 2) {
-  stop("Please give the vcf file name and min_majorblock\n")
+if (length(args) < 3) {
+  stop("Please give the vcf file name, min_majorblock, and window_size\n")
 }
 
 vcf_file = args[1]
 min_majorblock = as.numeric(args[2])
+window_size = as.numeric(args[3])
 
 suppressMessages(library(HaploBlocker))
 library(RColorBrewer)
-hap1b = read.delim("haplotype_ordered_genotable.txt", na.strings = "-")
-hap1b = hap1b[-nrow(hap1b),]
-dim(hap1b)
-# blocklist = block_calculation(dhm=hap1b[,-c(1:4)],bp_map=hap1b[,2],min_majorblock=min_majorblock,window_size = 5,prefilter=T)
-blocklist = block_calculation(dhm=vcf_file,
-  window_size = 5,
-  prefilter=T,
-  inbred = T,
-  min_majorblock=min_majorblock
-)
+# hap1b = read.delim("haplotype_ordered_genotable.txt", na.strings = "-")
+# hap1b = hap1b[-nrow(hap1b),]
+# dim(hap1b)
+data_file <- data_import(vcf_file, inbred=T)
+dhm <- data_file[[1]]
+bp_map <- data_file[[2]]
+rm(data_file)
+blocklist = block_calculation(dhm=dhm,bp_map=bp_map,min_majorblock=min_majorblock,window_size = window_size)
+# blocklist = block_calculation(dhm=vcf_file,
+#   window_size = 5,
+#   prefilter=T,
+#   inbred = T,
+#   min_majorblock=min_majorblock
+# )
 pdf(file = "haplo-block-graphs.pdf")
 plot_block(blocklist)
-plot_block(blocklist,type = "bp",xlim=range(hap1b[,2]))
+plot_block(blocklist,type = "bp",xlim=range(bp_map))
 blocklist_plot(blocklist)
 blocklist_plot_xsize(blocklist)
 dev.off()

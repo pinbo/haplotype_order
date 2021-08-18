@@ -1,11 +1,12 @@
 <tool id="haplotypev2" name="Haplotype analysis v2">
   <description>for a vcf subset</description>
-  <command interpreter="bash">run_haplotype_given_vcf.sh $vcfsubset $maxmissl $maxmissm $min_majorblock</command>
+  <command interpreter="bash">run_haplotype_given_vcf.sh $vcfsubset $maxmissl $maxmissm $min_majorblock $window_size</command>
   <inputs>
     <param format="vcf" name="vcfsubset" type="data" label="a vcf file of a chromosome region" help="You can download a region from T3: https://triticeaetoolbox.org/wheat/genotyping/download-vcf.php" />
     <param name="maxmissl" size="100" type="text" value="0.9" label="Missing values filter for lines (0 - 1). Default 90%"/>
     <param name="maxmissm" size="100" type="text" value="0.9" label="Missing values filter for markers (0 - 1). Default 90%"/>
-    <param name="min_majorblock" size="100" type="text" value="5000" label="Change this to a smaller number, say 100, if you dataset is small"/>
+    <param name="min_majorblock" size="100" type="text" value="5000" label="Change this to a smaller number if you want more blocks"/>
+    <param name="window_size" size="100" type="text" value="5" label="Change this to a larger number, say 20, if too many SNPs"/>
   </inputs>
   <outputs>
       <data format="tabular" name="result_table1" from_work_dir="haplotype_ordered_genotable.txt" label="Haplotype_ordered_geno_table"/>
@@ -23,13 +24,17 @@ Convert a vcf file to SNP file and order the individuals by similarity for haplo
 
 **Output**
 
-Three files are output from the analysis:
+Five files are output from the analysis:
 
 1. A pdf file with dendrogram graph of lines
 
 2. A raw table with line information and A/T/G/C coded genotyping results
 
 3. A haplotype ordered table with line information and A/T/G/C coded genotyping results
+
+4. Simplified haplotype matrix from HaploBlocker analysis
+
+5. haplotype block graphs from HaploBlocker analysis
 
 
   </help>
