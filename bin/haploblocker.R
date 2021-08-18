@@ -4,12 +4,20 @@
 # install.packages("~/Downloads/RandomFieldsUtils_0.6.6.tar.gz",type="source", repo=NULL)
 # install.packages("~/Downloads/HaploBlocker_1.6.06.tar.gz",type="source", repo=NULL)
 
+args = commandArgs(trailingOnly=TRUE)
+
+if (length(args) < 1) {
+  min_majorblock = 5000
+} else {
+  min_majorblock = args[1]
+}
+
 suppressMessages(library(HaploBlocker))
 library(RColorBrewer)
 hap1b = read.delim("haplotype_ordered_genotable.txt", na.strings = "-")
 hap1b = hap1b[-nrow(hap1b),]
 dim(hap1b)
-blocklist = block_calculation(dhm=hap1b[,-c(1:4)],bp_map=hap1b[,2],min_majorblock=100,window_size = 5)#,prefilter=T,overlap_remove=T)
+blocklist = block_calculation(dhm=hap1b[,-c(1:4)],bp_map=hap1b[,2],min_majorblock=min_majorblock,window_size = 5,prefilter=T)
 # blocklist = block_calculation(dhm="hap1B-filtered-lines.vcf")#,
                                  # window_size = 5,
                                  # prefilter=T
