@@ -10,11 +10,13 @@ maxmissl=$2
 maxmissm=$3
 min_majorblock=$4
 
+cp $vcf_file input.vcf
+
 script_path="`dirname "$0"`/bin" # scripts folder
 echo $script_path
 
 #step 2: convert from GT to SNP alleles
-cmd2="$script_path/convert_vcf_calls_to_SNP.py $vcf_file out.txt"
+cmd2="$script_path/convert_vcf_calls_to_SNP.py input.vcf out.txt"
 echo "Step 2: Convert vcf to SNP table: $cmd2"
 eval $cmd2
 # Step 3: sort lines by similarity for haplotype analysis
@@ -25,7 +27,7 @@ eval $cmd3
 echo "Finish successfully! Output data is 'haplotype_ordered_genotable.txt' "
 
 # Step 4: calculate haplotype blocks using HaploBlocker
-cmd4="$script_path/haploblocker.R $vcf_file $min_majorblock"
+cmd4="$script_path/haploblocker.R input.vcf $min_majorblock"
 echo "Step 4: calculate haplotype blocks using HaploBlocker: $cmd4"
 eval $cmd4
 echo "Finish successfully! Output data is 'haplo_block_matrix.txt' "
