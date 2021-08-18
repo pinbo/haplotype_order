@@ -10,6 +10,8 @@
       <data format="tabular" name="result_table1" from_work_dir="haplotype_ordered_genotable.txt" label="Haplotype_ordered_geno_table"/>
 	  <data format="tabular" name="result_table2" from_work_dir="out.txt" label="Raw_geno_table"/>
       <data format="pdf" name="graph" from_work_dir="dendrogram_of_lines.pdf" label="Dendrogram_of_lines"/>
+	  <data format="tabular" name="result_table3" from_work_dir="haplo_block_matrix.txt" label="haplo_block_matrix"/>
+      <data format="pdf" name="graph2" from_work_dir="haplo-block-graphs.pdf" label="haplo-block-graphs"/>
   </outputs>
 
   <help>

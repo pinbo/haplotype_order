@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 #  Copyright 2018 Junli Zhang <zhjl86@gmail.com>
@@ -49,9 +49,9 @@ with open(in_file) as file_one:
 	for line in file_one:
 		if line.startswith("#"):
 			if line.startswith("#CHROM"):
-				 header_line = line.strip("#")
-			         ll0 = header_line.split("\t")
- 			         out.write("\t".join(ll0[0:5] + ll0[(geno_starts - 1):]))
+				header_line = line.strip("#")
+				ll0 = header_line.split("\t")
+				out.write("\t".join(ll0[0:5] + ll0[(geno_starts - 1):]))
 			continue
 		line = line.strip()
 		if line: # and not line.startswith('#'):
