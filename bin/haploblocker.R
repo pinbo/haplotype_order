@@ -9,7 +9,7 @@ args = commandArgs(trailingOnly=TRUE)
 if (length(args) < 1) {
   min_majorblock = 5000
 } else {
-  min_majorblock = args[1]
+  min_majorblock = as.numeric(args[1])
 }
 
 suppressMessages(library(HaploBlocker))
