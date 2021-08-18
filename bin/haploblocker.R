@@ -4,7 +4,7 @@
 # install.packages("~/Downloads/RandomFieldsUtils_0.6.6.tar.gz",type="source", repo=NULL)
 # install.packages("~/Downloads/HaploBlocker_1.6.06.tar.gz",type="source", repo=NULL)
 
-library(HaploBlocker)
+suppressMessages(library(HaploBlocker))
 hap1b = read.delim("haplotype_ordered_genotable.txt", na.strings = "-")
 hap1b = hap1b[-nrow(hap1b),]
 dim(hap1b)
