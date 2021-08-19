@@ -1,12 +1,13 @@
 <tool id="haplotypev2" name="Haplotype analysis v2">
   <description>for a vcf subset</description>
-  <command interpreter="bash">run_haplotype_given_vcf.sh $vcfsubset $maxmissl $maxmissm $min_majorblock $window_size</command>
+  <command interpreter="bash">run_haplotype_given_vcf.sh $vcfsubset $maxmissl $maxmissm $min_majorblock $window_size $other_options</command>
   <inputs>
-    <param format="vcf" name="vcfsubset" type="data" label="a vcf file of a chromosome region" help="You can download a region from T3: https://triticeaetoolbox.org/wheat/genotyping/download-vcf.php" />
+    <param format="vcf" name="vcfsubset" type="data" label="a vcf file of a chromosome region" help="You can download a region from T3: https://wheat.triticeaetoolbox.org/downloads/download-vcf.pl" />
     <param name="maxmissl" size="100" type="text" value="0.9" label="Missing values filter for lines (0 - 1). Default 90%"/>
     <param name="maxmissm" size="100" type="text" value="0.9" label="Missing values filter for markers (0 - 1). Default 90%"/>
     <param name="min_majorblock" size="100" type="text" value="5000" label="min_majorblock parameter for HaploBlocker. Change this to a smaller number if you want more haplotype blocks"/>
     <param name="window_size" size="100" type="text" value="5" label="window_size parameter for HaploBlocker. Change this to a larger number, say 20, if too many SNPs"/>
+	<param name="other_options" size="100" type="text" value="prefilter=F,maf=0" label="other parameters for HaploBlocker function block_calculation (NO spaces allowed)"/>
   </inputs>
   <outputs>
       <data format="tabular" name="result_table1" from_work_dir="haplotype_ordered_genotable.txt" label="Haplotype_ordered_geno_table"/>

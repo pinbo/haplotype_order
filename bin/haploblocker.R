@@ -5,14 +5,14 @@
 # install.packages("~/Downloads/HaploBlocker_1.6.06.tar.gz",type="source", repo=NULL)
 
 args = commandArgs(trailingOnly=TRUE)
-if (length(args) < 3) {
-  stop("Please give the vcf file name, min_majorblock, and window_size\n")
+if (length(args) < 4) {
+  stop("Please give the vcf file name, min_majorblock, window_size, and other options for block_calculation function\n")
 }
 
 vcf_file = args[1]
 min_majorblock = as.numeric(args[2])
 window_size = as.numeric(args[3])
-
+other_options = args[4]
 suppressMessages(library(HaploBlocker))
 library(RColorBrewer)
 # hap1b = read.delim("haplotype_ordered_genotable.txt", na.strings = "-")
@@ -22,7 +22,9 @@ data_file <- data_import(vcf_file, inbred=T)
 dhm <- data_file[[1]]
 bp_map <- data_file[[2]]
 rm(data_file)
-blocklist = block_calculation(dhm=dhm,bp_map=bp_map,min_majorblock=min_majorblock,window_size = window_size)
+# blocklist = block_calculation(dhm=dhm,bp_map=bp_map,min_majorblock=min_majorblock,window_size = window_size)
+blocklist <- eval(parse(text = paste("block_calculation(dhm=dhm,bp_map=bp_map,min_majorblock=min_majorblock,window_size = window_size,", other_options, ")")))
+
 # blocklist = block_calculation(dhm=vcf_file,
 #   window_size = 5,
 #   prefilter=T,
