@@ -5,8 +5,8 @@
     <param format="vcf" name="vcfsubset" type="data" label="a vcf file of a chromosome region" help="You can download a region from T3: https://triticeaetoolbox.org/wheat/genotyping/download-vcf.php" />
     <param name="maxmissl" size="100" type="text" value="0.9" label="Missing values filter for lines (0 - 1). Default 90%"/>
     <param name="maxmissm" size="100" type="text" value="0.9" label="Missing values filter for markers (0 - 1). Default 90%"/>
-    <param name="min_majorblock" size="100" type="text" value="5000" label="Change this to a smaller number if you want more blocks"/>
-    <param name="window_size" size="100" type="text" value="5" label="Change this to a larger number, say 20, if too many SNPs"/>
+    <param name="min_majorblock" size="100" type="text" value="5000" label="min_majorblock parameter for HaploBlocker. Change this to a smaller number if you want more haplotype blocks"/>
+    <param name="window_size" size="100" type="text" value="5" label="window_size parameter for HaploBlocker. Change this to a larger number, say 20, if too many SNPs"/>
   </inputs>
   <outputs>
       <data format="tabular" name="result_table1" from_work_dir="haplotype_ordered_genotable.txt" label="Haplotype_ordered_geno_table"/>
