@@ -9,6 +9,9 @@ if (length(args) < 3) {
 snpfile = args[1]
 maxmissl = as.numeric(args[2]) # maximum missing values to keep a line
 maxmissm = as.numeric(args[3]) # maximum missing values to keep a marker
+cut_pct = 0.2
+if (length(args) == 4) cut_pct = as.numeric(args[4])
+cat("cut_pct is ", cut_pct, "\n")
 
 dd= read.delim(snpfile, check.names = F, as.is = T, na.strings = "N")
 dim(dd)
@@ -65,15 +68,16 @@ dim(dd4)
 snp.dist <- dist(dd4)
 fit <- hclust(snp.dist,method="ward.D2")
 ht = max(fit$height) # max height
+cut_ht = ht*cut_pct
 #str(fit)
 pdf(file="dendrogram_of_lines.pdf", width = 10+round(nrow(dd4)/35) )
 plot(fit, hang=-1, cex=1/(1+nrow(dd4)/250))
-rect.hclust(fit, h = ht/5, border = "blue")
+rect.hclust(fit, h = cut_ht, border = "blue")
 dev.off()
 
 # get big group number
 #maxheight = max(fit$height)
-ng = cutree(fit, h = ht/5) # number of group, use 5 as cut threshold
+ng = cutree(fit, h = cut_ht) # number of group
 table(ng)
 
 ordered_line_names = fit$labels[fit$order]
