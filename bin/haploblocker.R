@@ -33,11 +33,13 @@ rm(allLines)
 colnames(dhm)=hh[-c(1:9)]
 rownames(dhm)=paste0("bp",bp_map)
 # filter lines and SNPs
-min.marker = (1 - maxmissm) * nrow(dhm)
-dhm = dhm[,colSums(dhm==".")<=min.marker]
+# min.marker = (1 - maxmissm) * nrow(dhm)
+# dhm = dhm[,colSums(dhm==".")<=min.marker]
+dhm = dhm[, colSums(dhm==".") <= maxmissm * nrow(dhm)]
 dim(dhm)
-min.line = (1 - maxmissl) * ncol(dhm)
-dhm = dhm[rowSums(dhm==".")<=min.line,]
+# min.line = (1 - maxmissl) * ncol(dhm)
+# dhm = dhm[rowSums(dhm==".")<=min.line,]
+dhm = dhm[rowSums(dhm==".") <= maxmissl * ncol(dhm),]
 cat("dhm after filtering\n")
 dim(dhm)
 # blocklist = block_calculation(dhm=dhm,bp_map=bp_map,min_majorblock=min_majorblock,window_size = window_size)
