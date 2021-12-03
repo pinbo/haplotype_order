@@ -6,14 +6,14 @@ if (length(args) < 3) {
   stop("Please give the marker data, maximum missing data for lines, and maximum missing data for markers\n")
 }
 
-snpfile = args[1]
+snpfile = args[1] # snpfile format: chr, pos, ID, ref, alt, geno1, geno2, ...
 maxmissl = as.numeric(args[2]) # maximum missing values to keep a line
 maxmissm = as.numeric(args[3]) # maximum missing values to keep a marker
 cut_pct = 0.2
 if (length(args) == 4) cut_pct = as.numeric(args[4])
 cat("cut_pct is ", cut_pct, "\n")
 
-dd= read.delim(snpfile, check.names = F, as.is = T, na.strings = "N")
+dd= read.delim(snpfile, check.names = F, as.is = T, na.strings = c("N", "-"))
 dim(dd)
 dd = as.matrix(dd)
 nc = ncol(dd)
