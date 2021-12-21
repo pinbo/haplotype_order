@@ -75,6 +75,12 @@ plot(fit, hang=-1, cex=1/(1+nrow(dd4)/250))
 rect.hclust(fit, h = cut_ht, border = "blue")
 dev.off()
 
+# png file for publication
+png(filename="dendrogram_of_lines_600dpi.png", width = 10+round(nrow(dd4)/35), height=7, units = "in", res=600 )
+plot(fit, hang=-1, cex=1/(1+nrow(dd4)/250), xlab="", sub="")
+rect.hclust(fit, h = cut_ht, border = "blue")
+dev.off()
+
 # get big group number
 #maxheight = max(fit$height)
 ng = cutree(fit, h = cut_ht) # number of group
