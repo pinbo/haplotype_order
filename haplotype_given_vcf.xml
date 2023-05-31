@@ -5,16 +5,11 @@
     <param format="vcf" name="vcfsubset" type="data" label="a vcf file of a chromosome region" help="You can download a region from T3: https://wheat.triticeaetoolbox.org/downloads/download-vcf.pl" />
     <param name="maxmissl" size="100" type="text" value="0.9" label="Missing values filter for lines (0 - 1). Default 90%"/>
     <param name="maxmissm" size="100" type="text" value="0.9" label="Missing values filter for markers (0 - 1). Default 90%"/>
-    <param name="min_majorblock" size="100" type="text" value="5000" label="min_majorblock parameter for HaploBlocker. Change this to a smaller number if you want more haplotype blocks"/>
-    <param name="window_size" size="100" type="text" value="5" label="window_size parameter for HaploBlocker. Change this to a larger number, say 20, if too many SNPs"/>
-	<param name="other_options" size="100" type="text" value="prefilter=F,maf=0" label="other parameters for HaploBlocker function block_calculation (NO spaces allowed)"/>
   </inputs>
   <outputs>
       <data format="tabular" name="result_table1" from_work_dir="haplotype_ordered_genotable.txt" label="Haplotype_ordered_geno_table"/>
 	  <data format="tabular" name="result_table2" from_work_dir="out.txt" label="Raw_geno_table"/>
       <data format="pdf" name="graph" from_work_dir="dendrogram_of_lines.pdf" label="Dendrogram_of_lines"/>
-	  <data format="tabular" name="result_table3" from_work_dir="haplo_block_matrix.txt" label="haplo_block_matrix"/>
-      <data format="pdf" name="graph2" from_work_dir="haplo-block-graphs.pdf" label="haplo-block-graphs"/>
   </outputs>
 
   <help>
@@ -25,7 +20,7 @@ Convert a vcf file to SNP file and order the individuals by similarity for haplo
 
 **Output**
 
-Five files are output from the analysis:
+Three files are output from the analysis:
 
 1. A pdf file with dendrogram graph of lines
 
@@ -33,9 +28,6 @@ Five files are output from the analysis:
 
 3. A haplotype ordered table with line information and A/T/G/C coded genotyping results
 
-4. Simplified haplotype matrix from HaploBlocker analysis
-
-5. haplotype block graphs from HaploBlocker analysis
 
 
   </help>

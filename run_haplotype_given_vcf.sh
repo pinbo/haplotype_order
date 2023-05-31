@@ -8,9 +8,6 @@ vcf_file=$1 # vcf
 #meta_data=$5 # metadata for lines to merge to SNP table
 maxmissl=$2
 maxmissm=$3
-min_majorblock=$4
-window_size=$5
-other_options=$6
 
 cp $vcf_file input.vcf
 
@@ -27,9 +24,3 @@ echo "Step 3: Get the sorted SNP table for haplotype analysis: $cmd3"
 eval $cmd3
 
 echo "Finish successfully! Output data is 'haplotype_ordered_genotable.txt' "
-
-# Step 4: calculate haplotype blocks using HaploBlocker
-cmd4="$script_path/haploblocker.R input.vcf $min_majorblock $window_size $maxmissl $maxmissm $other_options"
-echo "Step 4: calculate haplotype blocks using HaploBlocker: $cmd4"
-eval $cmd4
-echo "Finish successfully! Output data is 'haplo_block_matrix.txt' "
